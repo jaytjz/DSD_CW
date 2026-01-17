@@ -1,0 +1,78 @@
+# Quartus II generated files
+*.rpt
+*.summary
+*.smsg
+*.done
+*.jdi
+*.pin
+*.sof
+*.pof
+*.sld
+*.qws
+*.bak
+*.chg
+*.eqn
+*.html
+*.qar
+*.cdf
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+timing/
+*.log
+
+# Auto-generated pin dumps
+*_pin_model_dump.txt
+
+# Qsys generated files
+.qsys_edit/
+first_nios2_system/
+*_generation_script*
+
+# IP cores (regenerated from .qsys)
+ip/
+
+# Nios II - Application build outputs
+software/*/obj/
+software/*/*.elf
+software/*/*.objdump
+software/*/*.map
+software/*/*.o
+software/*/*.d
+
+# Nios II - BSP ALL generated files (ignore entire BSP except specific files)
+software/*_bsp/*
+
+# But KEEP only these specific BSP files
+!software/*_bsp/
+!software/*_bsp/.project
+!software/*_bsp/.cproject
+!software/*_bsp/settings.bsp
+
+# Eclipse metadata
+software/.metadata/
+software/RemoteSystemsTempFiles/
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+bashrc.bashrc
+
+# Hardware files - keep these
+!*.qpf
+!*.qsf
+!*.qsys
+!*.sopcinfo
+!*.bdf
+!*.bsf
+!*.v
+!*.vhd
+!*.sv
+!*.sdc
+!*.tcl
+!*.qdf
