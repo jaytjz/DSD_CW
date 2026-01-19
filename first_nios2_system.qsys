@@ -233,7 +233,7 @@
   <parameter name="mpu_numOfInstRegion" value="8" />
   <parameter name="mpu_useLimit" value="false" />
   <parameter name="mpx_enabled" value="false" />
-  <parameter name="mul_32_impl" value="0" />
+  <parameter name="mul_32_impl" value="2" />
   <parameter name="mul_64_impl" value="0" />
   <parameter name="mul_shift_choice" value="1" />
   <parameter name="ocimem_ramBlockType" value="Automatic" />
