@@ -32,7 +32,9 @@ first_nios2_system/
 *_generation_script*
 
 # IP cores (regenerated from .qsys)
-ip/
+ip/*_inst.v
+ip/*_bb.v
+*.qip.bak
 
 # Nios II - Application build outputs
 software/*/obj/
