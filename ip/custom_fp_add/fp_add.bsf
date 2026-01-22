@@ -22,7 +22,7 @@ https://fpgasoftware.intel.com/eula.
 (header "symbol" (version "1.1"))
 (symbol
 	(rect 0 0 144 264)
-	(text "fp_mul" (rect 52 -1 80 11)(font "Arial" (font_size 10)))
+	(text "fp_add" (rect 52 -1 80 11)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 248 20 260)(font "Arial" ))
 	(port
 		(pt 0 72)

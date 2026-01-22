@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module fp_add_sub_tb;
+module fp_add_tb;
 
     // Testbench signals
     reg clk;
@@ -8,17 +8,15 @@ module fp_add_sub_tb;
     reg en;
     reg [31:0] a, b;
     wire [31:0] q;  // Addition result
-    wire [31:0] s;  // Subtraction result
     
-    // Instantiate the FP Add/Sub IP
-    fp_add_sub dut (
+    // Instantiate the FP Add IP
+    fp_add dut (
         .clk(clk),
         .areset(areset),
         .en(en),
         .a(a),
         .b(b),
-        .q(q),
-        .s(s)
+        .q(q)
     );
     
     // Clock generation: 50 MHz = 20ns period
@@ -37,33 +35,29 @@ module fp_add_sub_tb;
         en = 1;
         #20;
         
-        // Test 1: 1.0 + 2.0 = 3.0, 1.0 - 2.0 = -1.0
+        // Test 1: 1.0 + 2.0 = 3.0
         a = 32'h3F800000;  // 1.0
         b = 32'h40000000;  // 2.0
         #100;
         $display("1.0 + 2.0: q=%h (expected: 40400000)", q);
-        $display("1.0 - 2.0: s=%h (expected: BF800000)", s);
         
-        // Test 2: 5.0 + 3.0 = 8.0, 5.0 - 3.0 = 2.0
+        // Test 2: 5.0 + 3.0 = 8.0
         a = 32'h40A00000;  // 5.0
         b = 32'h40400000;  // 3.0
         #100;
         $display("5.0 + 3.0: q=%h (expected: 41000000)", q);
-        $display("5.0 - 3.0: s=%h (expected: 40000000)", s);
         
-        // Test 3: -2.0 + 3.0 = 1.0, -2.0 - 3.0 = -5.0
+        // Test 3: -2.0 + 3.0 = 1.0
         a = 32'hC0000000;  // -2.0
         b = 32'h40400000;  // 3.0
         #100;
         $display("-2.0 + 3.0: q=%h (expected: 3F800000)", q);
-        $display("-2.0 - 3.0: s=%h (expected: C0A00000)", s);
         
-        // Test 4: 0.0 + 0.0 = 0.0, 0.0 - 0.0 = 0.0
+        // Test 4: 0.0 + 0.0 = 0.0
         a = 32'h00000000;  // 0.0
         b = 32'h00000000;  // 0.0
         #100;
         $display("0.0 + 0.0: q=%h (expected: 00000000)", q);
-        $display("0.0 - 0.0: s=%h (expected: 00000000)", s);
         
         #100;
         $stop;

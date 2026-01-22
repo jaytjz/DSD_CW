@@ -8,6 +8,7 @@
 module fp_add_sub (
 		input  wire        clk,    //    clk.clk
 		input  wire        areset, // areset.reset
+		input  wire [0:0]  en,     //     en.en
 		input  wire [31:0] a,      //      a.a
 		input  wire [31:0] b,      //      b.b
 		output wire [31:0] q,      //      q.q
@@ -17,6 +18,7 @@ module fp_add_sub (
 	fp_add_sub_0002 fp_add_sub_inst (
 		.clk    (clk),    //    clk.clk
 		.areset (areset), // areset.reset
+		.en     (en),     //     en.en
 		.a      (a),      //      a.a
 		.b      (b),      //      b.b
 		.q      (q),      //      q.q
@@ -68,7 +70,7 @@ endmodule
 // Retrieval info: 	<generic name="performance_goal" value="frequency" />
 // Retrieval info: 	<generic name="rounding_mode" value="nearest with tie breaking away from zero" />
 // Retrieval info: 	<generic name="faithful_rounding" value="false" />
-// Retrieval info: 	<generic name="gen_enable" value="false" />
+// Retrieval info: 	<generic name="gen_enable" value="true" />
 // Retrieval info: 	<generic name="divide_type" value="0" />
 // Retrieval info: 	<generic name="select_signal_enable" value="false" />
 // Retrieval info: 	<generic name="scale_by_pi" value="false" />
