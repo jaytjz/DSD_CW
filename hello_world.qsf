@@ -119,6 +119,8 @@ set_global_assignment -name EDA_TEST_BENCH_NAME fp_add_sub_tb -section_id eda_si
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id fp_add_sub_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME fp_add_sub_tb -section_id fp_add_sub_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE ip/custom_fp_add_sub/fp_add_sub_tb.v -section_id fp_add_sub_tb
+set_global_assignment -name QIP_FILE ip/custom_fp_sub/fp_sub.qip
+set_global_assignment -name QIP_FILE ip/custom_fp_add/fp_add.qip
 set_global_assignment -name QIP_FILE ip/custom_fp_mul/fp_mul.qip
 set_global_assignment -name QIP_FILE ip/custom_fp_add_sub/fp_add_sub.qip
 set_global_assignment -name QIP_FILE ip/custom_mul/mul.qip
