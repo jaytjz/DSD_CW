@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python analyze_c_ops.py:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
