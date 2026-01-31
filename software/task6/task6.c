@@ -1,51 +1,138 @@
+#include <stdlib.h>
+#include <sys/alt_stdio.h>
+#include <sys/alt_alarm.h>
+#include <sys/times.h>
+#include <alt_types.h>
 #include <system.h>
 #include <stdio.h>
-#include <sys/times.h>
+#include <unistd.h>
+#include <math.h>
+#include "my_cosf.h"
+#include "cust_instr.h"
+
+// Test case 1
+//#define step 5
+//#define N 52
+
+// Test case 2
+//#define step 1/8.0
+//#define N 2041
+
+//Test case 3
+//#define step 1/256.0
+//#define N 65281
+
+// Test Case 4
+//#define N 2323
+//#define RANDSEED 334
+//void generateRandomVector(float x[N])
+//{
+//    int i;
+//    srand(RANDSEED);
+//    for (i=0; i<N; i++)
+//    {
+//        x[i] = ((float) rand()/ (float) RAND_MAX) * MAXVAL;
+//    }
+//}
+
+
+
+// Generates the vector x and stores it in the memory
+void generateVector(float x[], int N, float step)
+{
+	int i;
+	x[0] = 0;
+	for (i=1; i<N; i++)
+		x[i] = x[i-1] + step;
+}
+
+float taylor_cosf(float x){
+	int terms = 8;
+    float r = 1;
+    float previous_term = 1;
+
+    for(int i = 1; i < terms; i++){
+        previous_term = previous_term * -(x*x) / ((2*i) * (2*i - 1));
+        r += previous_term;
+    }
+    return r;
+}
+
+float sumVector(float x[], int M)
+{
+    float sum = 0.0f;
+
+    for (int i = 0; i < M; i++) { //sum += 0.5f * xi + (xi * xi * xi) * cosf((xi - 128.0f) / 128.0f);
+        float xi = x[i];
+        float term1 = cust_fp_mul(0.5f, xi);// 0.5f * xi
+        float xi2 = cust_fp_mul(xi, xi);
+        float xi3 = cust_fp_mul(xi2, xi); // xi * xi * xi
+        float num = cust_fp_sub(xi, 128.0f); // xi - 128.0f
+        float arg = num / 128.0f; // (xi - 128.0f) / 128.0f
+        float c = my_cosf(arg); // cosf(...)
+        float term2 = cust_fp_mul(xi3, c); // (xi^3) * cosf(...)
+        float tmp = cust_fp_add(term1, term2); // sum += term1 + term2  → fully wrapped
+        sum = cust_fp_add(sum, tmp);
+    }
+
+    return sum;
+}
+
+
+void runTestCase(int testNum, int N, float step)
+{
+	printf("\n========== Test Case %d ==========\n", testNum);
+	printf("N = %d, step = %f\n", N, step);
+
+	float x[N];
+	float y;
+
+	printf("Generating vector...\n");
+		generateVector(x, N, step);
+
+		printf("Computing sum (10 iterations)...\n");
+
+		clock_t exec_times[10];
+		clock_t total_time = 0;
+
+		// Run sumVector 10 times
+		for (int run = 0; run < 10; run++)
+		{
+			clock_t exec_t1, exec_t2;
+			exec_t1 = times(NULL);
+
+			y = sumVector(x, N);
+
+			exec_t2 = times(NULL);
+
+			exec_times[run] = exec_t2 - exec_t1;
+			total_time += exec_times[run];
+
+			printf("  Run %d: %lu ticks\n", run + 1, exec_times[run]);
+		}
+
+		float avg_time = (float)total_time / 10.0f;
+
+		printf("\nResult: %f\n", y);
+		printf("Total time (10 runs): %lu ticks\n", total_time);
+		printf("Average time: %.2f ticks\n", avg_time);
+		printf("===================================\n");
+}
 
 int main()
 {
-  printf("Hello from Nios II!\n");
-  printf("=== Custom Instruction Tests ===\n\n");
+	printf("Task 6!\n");
 
-  // Test 1: Integer Multiply
-  printf("--- Integer Multiply ---\n");
-  int int_a = 5;
-  int int_b = 7;
-  int int_result = ALT_CI_MUL_0(int_a, int_b);
-  printf("%d * %d = %d (expected: 35)\n\n", int_a, int_b, int_result);
+	// Test Case 1: step = 5, N = 52
+	runTestCase(1, 52, 5.0f);
 
-  // Test 2: FP Multiply
-  printf("--- FP Multiply ---\n");
-  float a = 2.5f;
-  float b = 3.2f;
-  float result;
-  *(unsigned int*)&result = ALT_CI_FP_MUL_0(
-      *(unsigned int*)&a,
-      *(unsigned int*)&b
-  );
-  printf("%.1f * %.1f = %.1f (expected: 8.0)\n\n", a, b, result);
+	// Test Case 2: step = 1/8.0, N = 2041
+	runTestCase(2, 2041, 1.0f/8.0f);
 
-  // Test 3: FP Add
-  printf("--- FP Add ---\n");
-  a = 1.5f;
-  b = 2.5f;
-  *(unsigned int*)&result = ALT_CI_FP_ADD_0(
-      *(unsigned int*)&a,
-      *(unsigned int*)&b
-  );
-  printf("%.1f + %.1f = %.1f (expected: 4.0)\n\n", a, b, result);
+	// Test Case 3: step = 1/256.0, N = 65281
+	runTestCase(3, 65281, 1.0f/256.0f);
 
-  // Test 4: FP Subtract
-  printf("--- FP Subtract ---\n");
-  a = 5.0f;
-  b = 3.0f;
-  *(unsigned int*)&result = ALT_CI_FP_SUB_0(
-      *(unsigned int*)&a,
-      *(unsigned int*)&b
-  );
-  printf("%.1f - %.1f = %.1f (expected: 2.0)\n\n", a, b, result);
+	printf("\nAll test cases completed!\n");
 
-  printf("=== All Tests Complete ===\n");
-
-  return 0;
+	return 0;
 }

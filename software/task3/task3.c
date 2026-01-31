@@ -45,44 +45,6 @@ void generateVector(float x[], int N, float step)
 		x[i] = x[i-1] + step;
 }
 
-float sumCosVector(float x[], int M)
-{
-    float sum = 0.0f;
-    for (int i = 0; i < M; i++){
-        float xi = x[i];
-        sum += 0.5f * xi + (xi * xi * xi) * cos((xi - 128.0f) / 128.0f);
-    }
-    return sum;
-}
-
-
-float sumVector(float x[], int M, float (*cosFunc)(float))
-{
-    float sum = 0.0f;
-    for (int i = 0; i < M; i++){
-        float xi = x[i];
-        sum += 0.5f * xi + (xi * xi * xi) * cosFunc((xi - 128.0f) / 128.0f);
-    }
-    return sum;
-}
-
-void timeVectorSum(float (*sumFunc)(float*, int, float (*)(float)),
-                   float* x, int n,
-                   float (*cosFunc)(float),
-                   const char* funcName) {
-    clock_t exec_t1, exec_t2;
-    float y;
-
-    exec_t1 = times(NULL);
-    y = sumFunc(x, n, cosFunc);
-    exec_t2 = times(NULL);
-
-    printf("Result of %s: %f\n", funcName, y);
-    printf("T1: %lu\n", (unsigned long)exec_t1);
-    printf("T2: %lu\n", (unsigned long)exec_t2);
-    printf("Time: %lu\n", (unsigned long)(exec_t2 - exec_t1));
-}
-
 float taylor_cosf(float x){
 	int terms = 8;
     float r = 1;
@@ -93,6 +55,16 @@ float taylor_cosf(float x){
         r += previous_term;
     }
     return r;
+}
+
+float sumVector(float x[], int M)
+{
+    float sum = 0.0f;
+    for (int i = 0; i < M; i++){
+        float xi = x[i];
+        sum += 0.5f * xi + (xi * xi * xi) * cos((xi - 128.0f) / 128.0f);
+    }
+    return sum;
 }
 
 void runTestCase(int testNum, int N, float step)
@@ -137,7 +109,6 @@ void runTestCase(int testNum, int N, float step)
 
 int main()
 {
-<<<<<<< Updated upstream
 	printf("Task 4!\n");
 
 	// Test Case 1: step = 5, N = 52
@@ -152,28 +123,4 @@ int main()
 	printf("\nAll test cases completed!\n");
 
 	return 0;
-=======
-	printf("Task 3!\n");
-	printf("N = %d\n", N);
-
-	// Define input vector
-	float x[N];
-	generateVector(x);
-
-	clock_t exec_t1, exec_t2;
-	float y;
-	exec_t1 = times(NULL);
-	y = sumCosVector(x, N);
-	exec_t2 = times(NULL);
-	printf("Result of cos: %f\n", y);
-	printf("T1: %lu\n", (unsigned long)exec_t1);
-	printf("T2: %lu\n", (unsigned long)exec_t2);
-	printf("Time: %lu\n", (unsigned long)(exec_t2 - exec_t1));
-
-	timeVectorSum(sumVector, x, N, cosf, "cosf");
-	timeVectorSum(sumVector, x, N, my_cosf, "my_cosf");
-	timeVectorSum(sumVector, x, N, taylor_cosf, "taylor8_cosf");
-
-  return 0;
->>>>>>> Stashed changes
 }

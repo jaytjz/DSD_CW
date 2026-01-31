@@ -19,3 +19,13 @@ D:/Imperial/DSD/DSD_CW/ip/custom_fp_add_sub/fp_add_sub.v
 
 Jan 21 03PM:16:31>: Megafunction FP_FUNCTIONS Intel FPGA IP v23.1 is not listed in any 
 wizard.lst file in the specified library path(s).Wizard launch aborted
+
+D:/Imperial/DSD/DSD_CW/ip/custom_fp_add_sub/fp_add_sub.v
+
+Jan 31 10AM:18:32>: Megafunction FP_FUNCTIONS Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+D:/Imperial/DSD/DSD_CW/ip/custom_fp_add_sub/fp_add_sub.v
+
+Jan 31 10AM:18:34>: Megafunction FP_FUNCTIONS Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted

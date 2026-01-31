@@ -12,7 +12,7 @@ module fp_add_sub (
 		input  wire [31:0] a,      //      a.a
 		input  wire [31:0] b,      //      b.b
 		output wire [31:0] q,      //      q.q
-		output wire [31:0] s       //      s.s
+		input  wire [0:0]  opSel   //  opSel.opSel
 	);
 
 	fp_add_sub_0002 fp_add_sub_inst (
@@ -22,7 +22,7 @@ module fp_add_sub (
 		.a      (a),      //      a.a
 		.b      (b),      //      b.b
 		.q      (q),      //      q.q
-		.s      (s)       //      s.s
+		.opSel  (opSel)   //  opSel.opSel
 	);
 
 endmodule
@@ -72,7 +72,7 @@ endmodule
 // Retrieval info: 	<generic name="faithful_rounding" value="false" />
 // Retrieval info: 	<generic name="gen_enable" value="true" />
 // Retrieval info: 	<generic name="divide_type" value="0" />
-// Retrieval info: 	<generic name="select_signal_enable" value="false" />
+// Retrieval info: 	<generic name="select_signal_enable" value="true" />
 // Retrieval info: 	<generic name="scale_by_pi" value="false" />
 // Retrieval info: 	<generic name="number_of_inputs" value="2" />
 // Retrieval info: 	<generic name="trig_no_range_reduction" value="false" />
