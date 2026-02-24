@@ -71,7 +71,7 @@ int my__kernel_rem_pio2f(float *x, float *y, int e0, int nx, int prec, const int
     /* compute q[0],q[1],...q[jk] */
 	for (i=0;i<=jk;i++) {
 		for(j=0,fw=0.0;j<=jx;j++) {
-		    fw = cust_fp_add(fw, cust_fp_mul(x[j], f[jx+i-j]));
+		    fw = (fw + cust_fp_mul(x[j], f[jx+i-j]));
 		}
 		q[i] = fw;
 	}
@@ -82,7 +82,7 @@ recompute:
 	for(i=0,j=jz,z=q[jz];j>0;i++,j--) {
 	    fw    =  (float)((int32_t)(cust_fp_mul(twon8, z)));
 	    iq[i] =  (int32_t)(cust_fp_sub(z, cust_fp_mul(two8, fw)));
-	    z     =  cust_fp_add(q[j-1], fw);
+	    z     =  (q[j-1] + fw);
 	}
 
     /* compute n */
@@ -132,7 +132,7 @@ recompute:
 
 		for(i=jz+1;i<=jz+k;i++) {   /* add q[jz+1] to q[jz+k] */
 		    f[jx+i] = (float) ipio2[jv+i];
-		    for(j=0,fw=0.0;j<=jx;j++) fw = cust_fp_add(fw, cust_fp_mul(x[j], f[jx+i-j]));
+		    for(j=0,fw=0.0;j<=jx;j++) fw = (fw + cust_fp_mul(x[j], f[jx+i-j]));
 		    q[i] = fw;
 		}
 		jz += k;
@@ -162,7 +162,7 @@ recompute:
 
     /* compute PIo2[0,...,jp]*q[jz,...,0] */
 	for(i=jz;i>=0;i--) {
-	    for(fw=0.0,k=0;k<=jp&&k<=jz-i;k++) fw = cust_fp_add(fw, cust_fp_mul(PIo2[k], q[i+k]));
+	    for(fw=0.0,k=0;k<=jp&&k<=jz-i;k++) fw = (fw + cust_fp_mul(PIo2[k], q[i+k]));
 	    fq[jz-i] = fw;
 	}
 
@@ -170,30 +170,30 @@ recompute:
 	switch(prec) {
 	    case 0:
 		fw = 0.0;
-		for (i=jz;i>=0;i--) fw = cust_fp_add(fw, fq[i]);
+		for (i=jz;i>=0;i--) fw = (fw + fq[i]);
 		y[0] = (ih==0)? fw: -fw;
 		break;
 	    case 1:
 	    case 2:
 		fw = 0.0;
-		for (i=jz;i>=0;i--) fw = cust_fp_add(fw, fq[i]);
+		for (i=jz;i>=0;i--) fw = (fw + fq[i]);
 		y[0] = (ih==0)? fw: -fw;
 		fw = cust_fp_sub(fq[0], fw);
-		for (i=1;i<=jz;i++) fw = cust_fp_add(fw, fq[i]);
+		for (i=1;i<=jz;i++) fw = (fw + fq[i]);
 		y[1] = (ih==0)? fw: -fw;
 		break;
 	    case 3:	/* painful */
 		for (i=jz;i>0;i--) {
-		    fw      = cust_fp_add(fq[i-1], fq[i]);
-		    fq[i]  = cust_fp_add(fq[i], cust_fp_sub(fq[i-1], fw));
+		    fw      = (fq[i-1] + fq[i]);
+		    fq[i]  = (fq[i] + cust_fp_sub(fq[i-1], fw));
 		    fq[i-1] = fw;
 		}
 		for (i=jz;i>1;i--) {
-		    fw      = cust_fp_add(fq[i-1], fq[i]);
-		    fq[i]  = cust_fp_add(fq[i], cust_fp_sub(fq[i-1], fw));
+		    fw      = (fq[i-1] + fq[i]);
+		    fq[i]  = (fq[i] + cust_fp_sub(fq[i-1], fw));
 		    fq[i-1] = fw;
 		}
-		for (fw=0.0,i=jz;i>=2;i--) fw = cust_fp_add(fw, fq[i]);
+		for (fw=0.0,i=jz;i>=2;i--) fw = (fw + fq[i]);
 		if(ih==0) {
 		    y[0] =  fq[0]; y[1] =  fq[1]; y[2] =  fw;
 		} else {
@@ -288,21 +288,21 @@ int32_t my__ieee754_rem_pio2f(float x, float *y)
 		}
 		return 1;
 	    } else {	/* negative x */
-		z = cust_fp_add(x, pio2_1);
+		z = (x + pio2_1);
 		if((ix&0xfffffff0)!=0x3fc90fd0) { /* 24+24 bit pi OK */
-		    y[0] = cust_fp_add(z, pio2_1t);
-		    y[1] = cust_fp_add(cust_fp_sub(z, y[0]), pio2_1t);
+		    y[0] = (z + pio2_1t);
+		    y[1] = (cust_fp_sub(z, y[0]) + pio2_1t);
 		} else {		/* near pi/2, use 24+24+24 bit pi */
-		    z = cust_fp_add(z, pio2_2);
-		    y[0] = cust_fp_add(z, pio2_2t);
-		    y[1] = cust_fp_add(cust_fp_sub(z, y[0]), pio2_2t);
+		    z = (z + pio2_2);
+		    y[0] = (z + pio2_2t);
+		    y[1] = (cust_fp_sub(z, y[0]) + pio2_2t);
 		}
 		return -1;
 	    }
 	}
 	if(ix<=0x43490f80) { /* |x| ~<= 2^7*(pi/2), medium size */
 	    t  = fabsf(x);
-	    n  = (int32_t) (cust_fp_add(cust_fp_mul(t, invpio2), half));
+	    n  = (int32_t) ((cust_fp_mul(t, invpio2) + half));
 	    fn = (float)n;
 	    r  = cust_fp_sub(t, cust_fp_mul(fn, pio2_1));
 	    w  = cust_fp_mul(fn, pio2_1t);	/* 1st round good to 40 bit */
@@ -374,8 +374,8 @@ float my__kernel_sinf(float x, float y, int iy) {
 	   {if((int)x==0) return x;}		/* generate inexact */
 	z	=  cust_fp_mul(x, x);
 	v	=  cust_fp_mul(z, x);
-	r	=  cust_fp_add(S2, cust_fp_mul(z, cust_fp_add(S3, cust_fp_mul(z, cust_fp_add(S4, cust_fp_mul(z, cust_fp_add(S5, cust_fp_mul(z, S6))))))));
-	if(iy==0) return cust_fp_add(x, cust_fp_mul(v, cust_fp_add(S1, cust_fp_mul(z, r))));
+	r	=  (S2 + cust_fp_mul(z, (S3 + cust_fp_mul(z, (S4 + cust_fp_mul(z, (S5 + cust_fp_mul(z, S6))))))));
+	if(iy==0) return (x + cust_fp_mul(v, (S1 + cust_fp_mul(z, r))));
 	else      return cust_fp_sub(x, cust_fp_sub(cust_fp_sub(cust_fp_mul(z, cust_fp_sub(cust_fp_mul(half, y), cust_fp_mul(v, r))), y), cust_fp_mul(v, S1)));
 }
 
@@ -397,7 +397,7 @@ float my__kernel_cosf (float x, float y) {
 	    if(((int)x)==0) return one;		/* generate inexact */
 	}
 	z  = cust_fp_mul(x, x);
-	r  = cust_fp_mul(z, cust_fp_add(C1, cust_fp_mul(z, cust_fp_add(C2, cust_fp_mul(z, cust_fp_add(C3, cust_fp_mul(z, cust_fp_add(C4, cust_fp_mul(z, cust_fp_add(C5, cust_fp_mul(z, C6)))))))))));
+	r  = cust_fp_mul(z, (C1 + cust_fp_mul(z, (C2 + cust_fp_mul(z, (C3 + cust_fp_mul(z, (C4 + cust_fp_mul(z, (C5 + cust_fp_mul(z, C6)))))))))));
 	if(ix < 0x3e99999a) 			/* if |x| < 0.3 */
 	    return cust_fp_sub(one, cust_fp_sub(cust_fp_mul((float)0.5, z), cust_fp_sub(cust_fp_mul(z, r), cust_fp_mul(x, y))));
 	else {
