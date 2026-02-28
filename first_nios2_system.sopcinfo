@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 23.1 991 (Future versions may contain additional information.) -->
- <!-- 2026.02.24.18:39:47 -->
+ <!-- 2026.02.27.23:36:10 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1771958387</value>
+  <value>1772235370</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -430,150 +430,6 @@ parameters are a RESULT of the module parameters. -->
     <direction>Output</direction>
     <width>1</width>
     <role>reset_n</role>
-   </port>
-  </interface>
- </module>
- <module
-   name="cordicInstr_0"
-   kind="cordicInstr"
-   version="1.0"
-   path="cordicInstr_0">
-  <!-- Describes a single module. Module parameters are
-the requested settings for a module instance. -->
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <interface
-     name="nios_custom_instruction_slave"
-     kind="nios_custom_instruction_slave"
-     version="23.1">
-   <!-- The connection points exposed by a module instance for the
-particular module parameters. Connection points and their
-parameters are a RESULT of the module parameters. -->
-   <parameter name="CIName">
-    <type>java.lang.String</type>
-    <value></value>
-    <derived>true</derived>
-    <enabled>true</enabled>
-    <visible>false</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="NPort">
-    <type>int</type>
-    <value>0</value>
-    <derived>true</derived>
-    <enabled>true</enabled>
-    <visible>false</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="clockCycle">
-    <type>int</type>
-    <value>5</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>true</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="clockCycleType">
-    <type>com.altera.sopcmodel.custominstruction.CustomInstruction$ClockCycleType</type>
-    <value>MULTICYCLE</value>
-    <derived>true</derived>
-    <enabled>true</enabled>
-    <visible>true</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="opcodeExtension">
-    <type>int</type>
-    <value>0</value>
-    <derived>true</derived>
-    <enabled>true</enabled>
-    <visible>false</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="opcodeExtensionLocked">
-    <type>boolean</type>
-    <value>false</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>false</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="opcodeExtensionLockedValue">
-    <type>int</type>
-    <value>0</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>false</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="operands">
-    <type>int</type>
-    <value>1</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>true</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="deviceFamily">
-    <type>java.lang.String</type>
-    <value>UNKNOWN</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>true</visible>
-    <valid>true</valid>
-   </parameter>
-   <parameter name="generateLegacySim">
-    <type>boolean</type>
-    <value>false</value>
-    <derived>false</derived>
-    <enabled>true</enabled>
-    <visible>true</visible>
-    <valid>true</valid>
-   </parameter>
-   <type>nios_custom_instruction</type>
-   <isStart>false</isStart>
-   <port>
-    <name>clk_en</name>
-    <direction>Input</direction>
-    <width>1</width>
-    <role>clk_en</role>
-   </port>
-   <port>
-    <name>theta</name>
-    <direction>Input</direction>
-    <width>32</width>
-    <role>dataa</role>
-   </port>
-   <port>
-    <name>cos_theta</name>
-    <direction>Output</direction>
-    <width>32</width>
-    <role>result</role>
-   </port>
-   <port>
-    <name>clk</name>
-    <direction>Input</direction>
-    <width>1</width>
-    <role>clk</role>
-   </port>
-   <port>
-    <name>reset</name>
-    <direction>Input</direction>
-    <width>1</width>
-    <role>reset</role>
    </port>
   </interface>
  </module>
@@ -2355,7 +2211,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="customInstSlavesSystemInfo">
    <type>java.lang.String</type>
-   <value><![CDATA[<info><slave name="fp_mul_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="cordicinstr_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="fp_add_sub_0" baseAddress="2" addressSpan="2" clockCycleType="MULTICYCLE" /></info>]]></value>
+   <value><![CDATA[<info><slave name="f_x_0" baseAddress="4" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="fp_add_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -3944,35 +3800,23 @@ parameters are a RESULT of the module parameters. -->
    </port>
    <customInstruction>
     <isBridge>false</isBridge>
-    <moduleName>fp_mul_0</moduleName>
+    <moduleName>f_x_0</moduleName>
     <slaveName>nios_custom_instruction_slave</slaveName>
-    <name>fp_mul_0.nios_custom_instruction_slave</name>
-    <opcodeNumber>1</opcodeNumber>
-    <opcodeMnemonic>fp_mul_0</opcodeMnemonic>
+    <name>f_x_0.nios_custom_instruction_slave</name>
+    <opcodeNumber>4</opcodeNumber>
+    <opcodeMnemonic>f_x_0</opcodeMnemonic>
    </customInstruction>
    <customInstruction>
     <isBridge>false</isBridge>
-    <moduleName>cordicInstr_0</moduleName>
+    <moduleName>fp_add_0</moduleName>
     <slaveName>nios_custom_instruction_slave</slaveName>
-    <name>cordicInstr_0.nios_custom_instruction_slave</name>
+    <name>fp_add_0.nios_custom_instruction_slave</name>
     <opcodeNumber>0</opcodeNumber>
-    <opcodeMnemonic>cordicinstr_0</opcodeMnemonic>
-   </customInstruction>
-   <customInstruction>
-    <isBridge>false</isBridge>
-    <moduleName>fp_add_sub_0</moduleName>
-    <slaveName>nios_custom_instruction_slave_1</slaveName>
-    <name>fp_add_sub_0.nios_custom_instruction_slave_1</name>
-    <opcodeNumber>2</opcodeNumber>
-    <opcodeMnemonic>fp_add_sub_0</opcodeMnemonic>
+    <opcodeMnemonic>fp_add_0</opcodeMnemonic>
    </customInstruction>
   </interface>
  </module>
- <module
-   name="fp_add_sub_0"
-   kind="fp_add_sub"
-   version="1.0"
-   path="fp_add_sub_0">
+ <module name="f_x_0" kind="f_x" version="1.0" path="f_x_0">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="deviceFamily">
@@ -3992,7 +3836,7 @@ the requested settings for a module instance. -->
    <valid>true</valid>
   </parameter>
   <interface
-     name="nios_custom_instruction_slave_1"
+     name="nios_custom_instruction_slave"
      kind="nios_custom_instruction_slave"
      version="23.1">
    <!-- The connection points exposed by a module instance for the
@@ -4008,7 +3852,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="NPort">
     <type>int</type>
-    <value>1</value>
+    <value>0</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -4016,7 +3860,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockCycle">
     <type>int</type>
-    <value>4</value>
+    <value>9</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>true</visible>
@@ -4056,7 +3900,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="operands">
     <type>int</type>
-    <value>2</value>
+    <value>1</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>true</visible>
@@ -4081,40 +3925,22 @@ parameters are a RESULT of the module parameters. -->
    <type>nios_custom_instruction</type>
    <isStart>false</isStart>
    <port>
-    <name>areset</name>
-    <direction>Input</direction>
-    <width>1</width>
-    <role>reset</role>
-   </port>
-   <port>
-    <name>en</name>
+    <name>clk_en</name>
     <direction>Input</direction>
     <width>1</width>
     <role>clk_en</role>
    </port>
    <port>
-    <name>a</name>
+    <name>x</name>
     <direction>Input</direction>
     <width>32</width>
     <role>dataa</role>
    </port>
    <port>
-    <name>b</name>
-    <direction>Input</direction>
-    <width>32</width>
-    <role>datab</role>
-   </port>
-   <port>
-    <name>q</name>
+    <name>result</name>
     <direction>Output</direction>
     <width>32</width>
     <role>result</role>
-   </port>
-   <port>
-    <name>opSel</name>
-    <direction>Input</direction>
-    <width>1</width>
-    <role>n</role>
    </port>
    <port>
     <name>clk</name>
@@ -4122,9 +3948,15 @@ parameters are a RESULT of the module parameters. -->
     <width>1</width>
     <role>clk</role>
    </port>
+   <port>
+    <name>reset</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>reset</role>
+   </port>
   </interface>
  </module>
- <module name="fp_mul_0" kind="fp_mul" version="1.0" path="fp_mul_0">
+ <module name="fp_add_0" kind="fp_add" version="1.0" path="fp_add_0">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="deviceFamily">
@@ -7458,7 +7290,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1771958387</value>
+   <value>1772235370</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -7478,7 +7310,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1771958387</value>
+   <value>1772235370</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -7494,7 +7326,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1771958387</value>
+   <value>1772235370</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -8592,14 +8424,14 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>irq</endConnectionPoint>
  </connection>
  <connection
-   name="cpu.custom_instruction_master/fp_mul_0.nios_custom_instruction_slave"
+   name="cpu.custom_instruction_master/f_x_0.nios_custom_instruction_slave"
    kind="nios_custom_instruction"
    version="23.1"
    start="cpu.custom_instruction_master"
-   end="fp_mul_0.nios_custom_instruction_slave">
+   end="f_x_0.nios_custom_instruction_slave">
   <parameter name="CIName">
    <type>java.lang.String</type>
-   <value>fp_mul_0</value>
+   <value>f_x_0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -8623,7 +8455,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>long</type>
-   <value>1</value>
+   <value>4</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -8655,18 +8487,18 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>cpu</startModule>
   <startConnectionPoint>custom_instruction_master</startConnectionPoint>
-  <endModule>fp_mul_0</endModule>
+  <endModule>f_x_0</endModule>
   <endConnectionPoint>nios_custom_instruction_slave</endConnectionPoint>
  </connection>
  <connection
-   name="cpu.custom_instruction_master/cordicInstr_0.nios_custom_instruction_slave"
+   name="cpu.custom_instruction_master/fp_add_0.nios_custom_instruction_slave"
    kind="nios_custom_instruction"
    version="23.1"
    start="cpu.custom_instruction_master"
-   end="cordicInstr_0.nios_custom_instruction_slave">
+   end="fp_add_0.nios_custom_instruction_slave">
   <parameter name="CIName">
    <type>java.lang.String</type>
-   <value>cordicinstr_0</value>
+   <value>fp_add_0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -8722,75 +8554,8 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>cpu</startModule>
   <startConnectionPoint>custom_instruction_master</startConnectionPoint>
-  <endModule>cordicInstr_0</endModule>
+  <endModule>fp_add_0</endModule>
   <endConnectionPoint>nios_custom_instruction_slave</endConnectionPoint>
- </connection>
- <connection
-   name="cpu.custom_instruction_master/fp_add_sub_0.nios_custom_instruction_slave_1"
-   kind="nios_custom_instruction"
-   version="23.1"
-   start="cpu.custom_instruction_master"
-   end="fp_add_sub_0.nios_custom_instruction_slave_1">
-  <parameter name="CIName">
-   <type>java.lang.String</type>
-   <value>fp_add_sub_0</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="CINameUpgrade">
-   <type>java.lang.String</type>
-   <value></value>
-   <derived>true</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="arbitrationPriority">
-   <type>int</type>
-   <value>1</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>false</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="baseAddress">
-   <type>long</type>
-   <value>2</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="opcodeExtensionUpgrade">
-   <type>int</type>
-   <value>-1</value>
-   <derived>true</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>cpu</startModule>
-  <startConnectionPoint>custom_instruction_master</startConnectionPoint>
-  <endModule>fp_add_sub_0</endModule>
-  <endConnectionPoint>nios_custom_instruction_slave_1</endConnectionPoint>
  </connection>
  <connection
    name="clk_0.clk_reset/cpu.reset"
@@ -9023,22 +8788,6 @@ parameters are a RESULT of the module parameters. -->
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
-  <name>cordicInstr</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>cordicInstr</displayName>
-  <version>1.0</version>
- </plugin>
- <plugin>
-  <instanceCount>3</instanceCount>
-  <name>nios_custom_instruction_slave</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Custom Instruction Slave</displayName>
-  <version>23.1</version>
- </plugin>
- <plugin>
-  <instanceCount>1</instanceCount>
   <name>altera_nios2_gen2</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
@@ -9103,18 +8852,26 @@ parameters are a RESULT of the module parameters. -->
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
-  <name>fp_add_sub</name>
+  <name>f_x</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>fp_add_sub</displayName>
+  <displayName>f_x</displayName>
   <version>1.0</version>
  </plugin>
  <plugin>
+  <instanceCount>2</instanceCount>
+  <name>nios_custom_instruction_slave</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Custom Instruction Slave</displayName>
+  <version>23.1</version>
+ </plugin>
+ <plugin>
   <instanceCount>1</instanceCount>
-  <name>fp_mul</name>
+  <name>fp_add</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>fp_mul</displayName>
+  <displayName>fp_add</displayName>
   <version>1.0</version>
  </plugin>
  <plugin>
@@ -9198,7 +8955,7 @@ parameters are a RESULT of the module parameters. -->
   <version>23.1</version>
  </plugin>
  <plugin>
-  <instanceCount>3</instanceCount>
+  <instanceCount>2</instanceCount>
   <name>nios_custom_instruction</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>

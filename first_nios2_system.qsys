@@ -41,12 +41,28 @@
          type = "String";
       }
    }
+   element f_x_0
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
    element first_nios2_system
    {
       datum _originalDeviceFamily
       {
          value = "Cyclone V";
          type = "String";
+      }
+   }
+   element fp_add_0
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
       }
    }
    element fp_add_sub_0
@@ -178,7 +194,7 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="cordicInstr_0" kind="cordicInstr" version="1.0" enabled="1" />
+ <module name="cordicInstr_0" kind="cordicInstr" version="1.0" enabled="0" />
  <module name="cpu" kind="altera_nios2_gen2" version="23.1" enabled="1">
   <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="1" />
   <parameter name="AUTO_CLK_RESET_DOMAIN" value="1" />
@@ -192,7 +208,7 @@
   <parameter name="cpuArchRev" value="1" />
   <parameter name="cpuID" value="0" />
   <parameter name="cpuReset" value="false" />
-  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="fp_mul_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="cordicinstr_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="fp_add_sub_0" baseAddress="2" addressSpan="2" clockCycleType="MULTICYCLE" /></info>]]></parameter>
+  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="f_x_0" baseAddress="4" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="fp_add_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
   <parameter name="customInstSlavesSystemInfo_nios_a" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_b" value="&lt;info/&gt;" />
   <parameter name="customInstSlavesSystemInfo_nios_c" value="&lt;info/&gt;" />
@@ -357,8 +373,10 @@
   <parameter name="tracefilename" value="" />
   <parameter name="userDefinedSettings" value="" />
  </module>
- <module name="fp_add_sub_0" kind="fp_add_sub" version="1.0" enabled="1" />
- <module name="fp_mul_0" kind="fp_mul" version="1.0" enabled="1" />
+ <module name="f_x_0" kind="f_x" version="1.0" enabled="1" />
+ <module name="fp_add_0" kind="fp_add" version="1.0" enabled="1" />
+ <module name="fp_add_sub_0" kind="fp_add_sub" version="1.0" enabled="0" />
+ <module name="fp_mul_0" kind="fp_mul" version="1.0" enabled="0" />
  <module
    name="jtag_uart"
    kind="altera_avalon_jtag_uart"
@@ -546,6 +564,24 @@
    start="cpu.custom_instruction_master"
    end="cordicInstr_0.nios_custom_instruction_slave">
   <parameter name="CIName" value="cordicinstr_0" />
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0" />
+ </connection>
+ <connection
+   kind="nios_custom_instruction"
+   version="23.1"
+   start="cpu.custom_instruction_master"
+   end="f_x_0.nios_custom_instruction_slave">
+  <parameter name="CIName" value="f_x_0" />
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="4" />
+ </connection>
+ <connection
+   kind="nios_custom_instruction"
+   version="23.1"
+   start="cpu.custom_instruction_master"
+   end="fp_add_0.nios_custom_instruction_slave">
+  <parameter name="CIName" value="fp_add_0" />
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0" />
  </connection>

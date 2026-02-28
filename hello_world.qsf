@@ -118,6 +118,12 @@ set_global_assignment -name EDA_TEST_BENCH_NAME fp_add_sub_tb -section_id eda_si
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id fp_add_sub_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME fp_add_sub_tb -section_id fp_add_sub_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE ip/custom_fp_add_sub/fp_add_sub_tb.v -section_id fp_add_sub_tb
+set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 4.0
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
+set_global_assignment -name SYSTEMVERILOG_FILE ip/f_x/f_x.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ip/cordicInstr/cordicInstr.sv
 set_global_assignment -name QIP_FILE ip/custom_fp_sub/fp_sub.qip
 set_global_assignment -name QIP_FILE ip/custom_fp_add/fp_add.qip
