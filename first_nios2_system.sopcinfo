@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 23.1 991 (Future versions may contain additional information.) -->
- <!-- 2026.03.01.19:26:22 -->
+ <!-- 2026.03.02.00:33:11 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1772393182</value>
+  <value>1772411590</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -2090,7 +2090,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="dataSlaveMapParam">
    <type>java.lang.String</type>
-   <value><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x80000' end='0xDF000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x100800' end='0x101000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sys_clk_timer.s1' start='0x101000' end='0x101020' type='altera_avalon_timer.s1' /><slave name='msgdma_0.csr' start='0x101020' end='0x101040' type='altera_msgdma.csr' /><slave name='led_pio.s1' start='0x101040' end='0x101050' type='altera_avalon_pio.s1' /><slave name='msgdma_0.descriptor_slave' start='0x101050' end='0x101060' type='altera_msgdma.descriptor_slave' /><slave name='dma_f_x_0.avalon_slave_0' start='0x101060' end='0x101070' type='dma_f_x.avalon_slave_0' /><slave name='sysid.control_slave' start='0x101070' end='0x101078' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x101078' end='0x101080' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></value>
+   <value><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x80000' end='0xDF000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x100800' end='0x101000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sys_clk_timer.s1' start='0x101000' end='0x101020' type='altera_avalon_timer.s1' /><slave name='msgdma_0.csr' start='0x101020' end='0x101040' type='altera_msgdma.csr' /><slave name='dma_f_x_0.avalon_slave_0' start='0x101040' end='0x101050' type='dma_f_x.avalon_slave_0' /><slave name='led_pio.s1' start='0x101050' end='0x101060' type='altera_avalon_pio.s1' /><slave name='msgdma_0.descriptor_slave' start='0x101060' end='0x101070' type='altera_msgdma.descriptor_slave' /><slave name='sysid.control_slave' start='0x101070' end='0x101078' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x101078' end='0x101080' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -2775,7 +2775,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dma_f_x_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dma_f_x_0.avalon_slave_0</name>
-    <baseAddress>1052768</baseAddress>
+    <baseAddress>1052736</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -2807,7 +2807,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>msgdma_0</moduleName>
     <slaveName>descriptor_slave</slaveName>
     <name>msgdma_0.descriptor_slave</name>
-    <baseAddress>1052752</baseAddress>
+    <baseAddress>1052768</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -2831,7 +2831,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>led_pio</moduleName>
     <slaveName>s1</slaveName>
     <name>led_pio.s1</name>
-    <baseAddress>1052736</baseAddress>
+    <baseAddress>1052752</baseAddress>
     <span>16</span>
    </memoryBlock>
   </interface>
@@ -4219,6 +4219,18 @@ parameters are a RESULT of the module parameters. -->
     <direction>Output</direction>
     <width>32</width>
     <role>readdata</role>
+   </port>
+   <port>
+    <name>avs_write</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>write</role>
+   </port>
+   <port>
+    <name>avs_writedata</name>
+    <direction>Input</direction>
+    <width>32</width>
+    <role>writedata</role>
    </port>
   </interface>
   <interface
@@ -5920,7 +5932,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DATA_FIFO_DEPTH</name>
-   <value>64</value>
+   <value>128</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DATA_WIDTH</name>
@@ -5956,7 +5968,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.MAX_BYTE</name>
-   <value>1024</value>
+   <value>262144</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.MAX_STRIDE</name>
@@ -6052,7 +6064,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="DATA_FIFO_DEPTH">
    <type>int</type>
-   <value>64</value>
+   <value>128</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6076,7 +6088,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="MAX_BYTE">
    <type>int</type>
-   <value>1024</value>
+   <value>262144</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9880,7 +9892,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1772393182</value>
+   <value>1772411590</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -9900,7 +9912,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1772393182</value>
+   <value>1772411590</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -9916,7 +9928,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1772393182</value>
+   <value>1772411590</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -10440,7 +10452,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00101060</value>
+   <value>0x00101040</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -10644,7 +10656,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00101050</value>
+   <value>0x00101060</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -10797,7 +10809,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00101040</value>
+   <value>0x00101050</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

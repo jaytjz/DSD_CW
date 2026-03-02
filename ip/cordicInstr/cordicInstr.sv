@@ -39,7 +39,7 @@ end
 localparam signed [22:0] X_INIT = 23'd1273502;
 localparam signed [22:0] Y_INIT = 23'd0;
 localparam int ITERATIONS      = 17;
-localparam int ITERS_PER_STAGE = 5;  // combinatorial iterations per pipeline register
+localparam int ITERS_PER_STAGE = 1;  // one pipeline register per iteration → latency = 17
 
 logic signed [22:0] ATAN[17] = '{
     23'd1647099, 23'd972340,  23'd513757,  23'd260791,
@@ -61,9 +61,8 @@ assign y[0] = Y_INIT;
 assign t[0] = theta_fixed;
 
 // ── Stages 1..ITERATIONS ──────────────────────────────────────────────────
-// Last iteration of each group → always_ff gated by clk_en (pipeline register).
-// All other iterations         → assign (combinatorial, no added latency).
-// Registers fall at i = 4, 9, 14, 16  →  4-cycle pipeline.
+// With ITERS_PER_STAGE=1 every iteration gets its own pipeline register.
+// All 17 iterations are registered → latency = 17 clock cycles.
 genvar i;
 generate
     for (i = 0; i < ITERATIONS; i++) begin : cordic_stage

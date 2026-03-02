@@ -2,12 +2,12 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 1, 2026 5:59:17 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1772387957928</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Mar 2, 2026 12:49:49 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1772412589777</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>D:\Imperial\DSD\DSD_CW\software\task8_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>D:\Imperial\DSD\DSD_CW\first_nios2_system.sopcinfo</SopcDesignFile>
-        <SystemFileHash>e9e630d59635f74d8c5953e3141c19189fd7ccf66228f5645796d1a163e6462</SystemFileHash>
+        <SystemFileHash>e7456db42de925a2fbe7f13b55b3ed9497f7d4fceda88f4399ed28d289438c3</SystemFileHash>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -900,12 +900,6 @@
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <MemoryMap>
-                <slaveDescriptor>dma_f_x_0</slaveDescriptor>
-                <addressRange>0x00000000 - 0x0000001F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>onchip_mem</slaveDescriptor>
                 <addressRange>0x00080000 - 0x000DEFFF</addressRange>
                 <addressSpan>389120</addressSpan>
@@ -918,20 +912,38 @@
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>led_pio</slaveDescriptor>
+                <slaveDescriptor>msgdma_0_csr</slaveDescriptor>
+                <addressRange>0x00101020 - 0x0010103F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>dma_f_x_0</slaveDescriptor>
                 <addressRange>0x00101040 - 0x0010104F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>led_pio</slaveDescriptor>
+                <addressRange>0x00101050 - 0x0010105F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>msgdma_0_descriptor_slave</slaveDescriptor>
+                <addressRange>0x00101060 - 0x0010106F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>sysid</slaveDescriptor>
-                <addressRange>0x00101050 - 0x00101057</addressRange>
+                <addressRange>0x00101070 - 0x00101077</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00101058 - 0x0010105F</addressRange>
+                <addressRange>0x00101078 - 0x0010107F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

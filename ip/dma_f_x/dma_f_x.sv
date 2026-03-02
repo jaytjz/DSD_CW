@@ -8,15 +8,16 @@
 // both ready for the next computation.
 //
 // MM slave register map (word addresses):
-//   addr 0  →  {31'b0, done}     (read-only)
-//   addr 1  →  sum (IEEE 754)    (read-only, valid when done=1)
+//   addr 0  →  read:  {31'b0, done}     (done=1 when result ready)
+//              write: any value clears done (use before submitting next DMA)
+//   addr 1  →  read:  sum (IEEE 754)    (valid when done=1)
 //
-// Timing per element (22 posedges in WAIT_FX):
-//   fx_count 0–20: f_x S0→S21 (21 clk_en posedges), add_q=f(x) after posedge 20
-//   fx_count 21  : f_x S21→S0 (reset for next use);
+// Timing per element (23 posedges in WAIT_FX):
+//   fx_count 0–21: f_x S0→S22 (22 clk_en posedges), add_q=f(x) after posedge 21
+//   fx_count 22  : f_x S22→S0 (reset for next use);
 //                  fx_captured latches fx_result PRE-EDGE (= f(x))
 //   ACCUMULATE   : 3 posedges, acc fp_add uses fx_captured
-//   Total        : 25 cycles/element  (sink_ready=0 during computation)
+//   Total        : 26 cycles/element  (sink_ready=0 during computation)
 
 module dma_f_x (
     input  logic        clk,
@@ -29,10 +30,12 @@ module dma_f_x (
     input  logic        sink_startofpacket,
     input  logic        sink_endofpacket,
 
-    // --- Avalon-MM Slave (CPU read interface) ---
+    // --- Avalon-MM Slave (CPU read/write interface) ---
     input  logic [1:0]  avs_address,
     input  logic        avs_read,
-    output logic [31:0] avs_readdata
+    output logic [31:0] avs_readdata,
+    input  logic        avs_write,
+    input  logic [31:0] avs_writedata   // unused: any write to addr 0 clears done
 );
 
 // ── f_x instance ─────────────────────────────────────────────────────────
@@ -104,6 +107,10 @@ always_ff @(posedge clk) begin
         done        <= 1'b0;
         sum         <= 32'b0;
     end else begin
+        // CPU write to addr 0: clear done so next poll won't see stale result
+        if (avs_write && avs_address == 2'd0)
+            done <= 1'b0;
+
         case (state)
 
             // ── Wait for next element from mSGDMA ─────────────────────
@@ -114,7 +121,10 @@ always_ff @(posedge clk) begin
                         acc_sum <= 32'b0;
                         done    <= 1'b0;
                     end
-                    x_reg    <= sink_data;
+                    // mSGDMA sends byte 0 of memory at sink_data[31:24] (big-endian bus)
+                    // but IEEE 754 floats are little-endian in NIOS II memory → swap
+                    x_reg    <= {sink_data[7:0], sink_data[15:8],
+                                 sink_data[23:16], sink_data[31:24]};
                     was_last <= sink_endofpacket;
                     fx_en    <= 1'b1;
                     fx_count <= 5'd0;
@@ -122,9 +132,9 @@ always_ff @(posedge clk) begin
                 end
             end
 
-            // ── f_x computes over 22 posedges (fx_count 0→21) ──────────
+            // ── f_x computes over 23 posedges (fx_count 0→22) ──────────
             WAIT_FX: begin
-                if (fx_count == 5'd21) begin
+                if (fx_count == 5'd22) begin
                     fx_captured <= fx_result;  // capture f(x) pre-edge
                     fx_en       <= 1'b0;       // freeze f_x at S0
                     fx_count    <= 5'd0;
