@@ -4,9 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/alt_stdio.h>
-#include <sys/alt_alarm.h>
 #include <sys/times.h>
-#include "sys/alt_timestamp.h"
 
 static inline uint32_t f32_to_u32(float x) {
     uint32_t u;
@@ -67,32 +65,30 @@ static void run_test(const char* name, float start, float step, float end) {
     // --- timing pass (10 runs over full vector) ---
     printf("Timing (10 runs)...\n");
 
-    alt_u32 exec_times[10];
-    alt_u32 total_time = 0;
+    clock_t exec_times[10];
+    clock_t total_time = 0;
     float   y          = 0.0f;
 
     for (int run = 0; run < 10; run++)
     {
-        alt_timestamp_start();
-        alt_u32 t0 = alt_timestamp();
+        clock_t t0 = times(NULL);
 
         for (float x = start; x <= end; x += step)
             y = cust_f_x(x);
 
-        alt_u32 t1      = alt_timestamp();
+        clock_t t1      = times(NULL);
         exec_times[run] = t1 - t0;
         total_time     += exec_times[run];
 
-        printf("  Run %d: %lu cycles  (%.2f us)\n",
-               run + 1, exec_times[run], (float)exec_times[run] * 20.0f / 1000.0f);
+        printf("  Run %d: %lu ticks\n",
+               run + 1, (unsigned long)exec_times[run]);
     }
 
-    float avg_cycles = (float)total_time / 10.0f;
+    float avg_ticks = (float)total_time / 10.0f;
 
-    printf("Total cycles    : %lu\n",    total_time);
-    printf("Avg cycles/run  : %.2f\n",   avg_cycles);
-    printf("Avg cycles/call : %.2f\n",   avg_cycles / (float)count);
-    printf("Avg time/run    : %.2f us\n", avg_cycles * 20.0f / 1000.0f);
+    printf("Total ticks     : %lu\n",  (unsigned long)total_time);
+    printf("Avg ticks/run   : %.2f\n", avg_ticks);
+    printf("Avg ticks/call  : %.2f\n", avg_ticks / (float)count);
     (void)y;
 }
 
