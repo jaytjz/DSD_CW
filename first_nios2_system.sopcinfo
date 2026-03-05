@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 23.1 991 (Future versions may contain additional information.) -->
- <!-- 2026.03.04.11:50:47 -->
+ <!-- 2026.03.05.10:45:43 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1772625047</value>
+  <value>1772707542</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -5932,7 +5932,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DATA_FIFO_DEPTH</name>
-   <value>128</value>
+   <value>16</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DATA_WIDTH</name>
@@ -5940,7 +5940,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DESCRIPTOR_FIFO_DEPTH</name>
-   <value>128</value>
+   <value>8</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DMA_MODE</name>
@@ -5964,7 +5964,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.MAX_BURST_COUNT</name>
-   <value>16</value>
+   <value>4</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.MAX_BYTE</name>
@@ -6064,7 +6064,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="DATA_FIFO_DEPTH">
    <type>int</type>
-   <value>128</value>
+   <value>16</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6072,7 +6072,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="DESCRIPTOR_FIFO_DEPTH">
    <type>int</type>
-   <value>128</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6112,7 +6112,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="MAX_BURST_COUNT">
    <type>int</type>
-   <value>16</value>
+   <value>4</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6687,7 +6687,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>mm_read_burstcount</name>
     <direction>Output</direction>
-    <width>5</width>
+    <width>3</width>
     <role>burstcount</role>
    </port>
    <memoryBlock>
@@ -9892,7 +9892,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1772625047</value>
+   <value>1772707542</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -9912,7 +9912,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1772625047</value>
+   <value>1772707542</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -9928,7 +9928,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1772625047</value>
+   <value>1772707542</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>

@@ -6,6 +6,9 @@ module cordicInstr(
     output logic [31:0] cos_theta   // IEEE 754 float result
 );
 
+// Register float input to cut timing into float->fixed conversion.
+logic [31:0] theta_in_reg;
+
 // ── float → Q2.21 ─────────────────────────────────────────────────────────
 logic        f2fx_sign;
 logic [7:0]  f2fx_exp;
@@ -14,9 +17,9 @@ logic [7:0]  f2fx_shift;
 logic [22:0] f2fx_mag;
 logic signed [22:0] theta_fixed;
 
-assign f2fx_sign          = theta[31];
-assign f2fx_exp           = theta[30:23];
-assign f2fx_mantissa_full = {1'b1, theta[22:0]};
+assign f2fx_sign          = theta_in_reg[31];
+assign f2fx_exp           = theta_in_reg[30:23];
+assign f2fx_mantissa_full = {1'b1, theta_in_reg[22:0]};
 
 always_comb begin
     f2fx_shift  = 8'd0;
@@ -116,7 +119,19 @@ end
 assign fx2f_k               = 5'd22 - fx2f_leading_zeros;
 assign fx2f_exp_biased      = (fx2f_mag == 0) ? 8'd0 : 8'(fx2f_k) + 8'd106;
 assign fx2f_mantissa_shifted = fx2f_mag << (5'd22 - fx2f_k);
-assign cos_theta = (fx2f_mag == 0) ? 32'd0
-                                   : {fx2f_sign, fx2f_exp_biased, fx2f_mantissa_shifted[21:0], 1'b0};
+logic [31:0] cos_theta_comb;
+assign cos_theta_comb = (fx2f_mag == 0) ? 32'd0
+                                         : {fx2f_sign, fx2f_exp_biased, fx2f_mantissa_shifted[21:0], 1'b0};
+
+// Register float output to cut timing from fixed->float conversion.
+always_ff @(posedge clk) begin
+    if (reset) begin
+        theta_in_reg <= 32'b0;
+        cos_theta    <= 32'b0;
+    end else if (clk_en) begin
+        theta_in_reg <= theta;
+        cos_theta    <= cos_theta_comb;
+    end
+end
 
 endmodule

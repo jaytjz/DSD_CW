@@ -458,15 +458,15 @@
   <parameter name="BURST_WRAPPING_SUPPORT" value="0" />
   <parameter name="CHANNEL_ENABLE" value="0" />
   <parameter name="CHANNEL_WIDTH" value="8" />
-  <parameter name="DATA_FIFO_DEPTH" value="128" />
+  <parameter name="DATA_FIFO_DEPTH" value="16" />
   <parameter name="DATA_WIDTH" value="32" />
-  <parameter name="DESCRIPTOR_FIFO_DEPTH" value="128" />
+  <parameter name="DESCRIPTOR_FIFO_DEPTH" value="8" />
   <parameter name="ENHANCED_FEATURES" value="0" />
   <parameter name="ERROR_ENABLE" value="0" />
   <parameter name="ERROR_WIDTH" value="8" />
   <parameter name="EXPOSE_ST_PORT" value="0" />
   <parameter name="FIX_ADDRESS_WIDTH" value="32" />
-  <parameter name="MAX_BURST_COUNT" value="16" />
+  <parameter name="MAX_BURST_COUNT" value="4" />
   <parameter name="MAX_BYTE" value="262144" />
   <parameter name="MAX_STRIDE" value="1" />
   <parameter name="MODE" value="1" />
